@@ -6,6 +6,12 @@ import requests
 import hashlib
 import json
 
+
+@main.route('/')
+def index():
+    return "it works!"
+
+
 @main.route('/check_signature')
 def check_signature():
     signature = request.args.get('signature')
@@ -20,6 +26,7 @@ def check_signature():
         return True
     else:
         return False
+
 
 @main.route('/get_access_token')
 def get_access_token():
