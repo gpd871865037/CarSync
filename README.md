@@ -1,2 +1,2 @@
-# pspider
-a simple spider framework
+# CarSync
+sync car info among some websites
