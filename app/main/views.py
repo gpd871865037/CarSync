@@ -5,12 +5,25 @@ import requests
 import hashlib
 import json
 
+# 绑定帐号
+@main.route('/bind_account')
+def bind_account():
+    return render_template('bind_account.html')
 
-@main.route('/')
-def index():
-    return render_template('index.html')
+
+# 发布新车源
+@main.route('/new_vehicle')
+def new_vehicle():
+    return render_template('new_vehicle.html')
 
 
+# 车源发布情况
+@main.route('/index_vehicle')
+def index_vehicle():
+    return render_template('index_vehicle.html')
+
+
+# 验证微信签名
 @main.route('/check_signature')
 def check_signature():
     signature = request.args.get('signature')
@@ -27,6 +40,7 @@ def check_signature():
         return False
 
 
+# 获得微信token
 @main.route('/get_access_token')
 def get_access_token():
     app_id = "wx54073d86056904da"
