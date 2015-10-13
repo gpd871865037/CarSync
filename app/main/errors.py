@@ -1,5 +1,3 @@
-__author__ = 'candys'
-
 from flask import render_template
 from . import main
 

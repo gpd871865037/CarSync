@@ -1,6 +1,5 @@
-__author__ = 'candys'
-
 from flask import request
+from flask import render_template
 from . import main
 import requests
 import hashlib
@@ -9,7 +8,7 @@ import json
 
 @main.route('/')
 def index():
-    return "it works!"
+    return render_template('index.html')
 
 
 @main.route('/check_signature')
