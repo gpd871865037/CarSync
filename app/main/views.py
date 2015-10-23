@@ -54,8 +54,8 @@ def check_signature():
 # FIXME 暂时先注释掉验证服务器的方法，转而接受微信的POST请求
 @main.route('/get_access_token')
 def get_access_token():
-    app_id = "wx606d7782e48067f8"
-    app_secret = "edaaca8066c752ccd826a41cd43c9bd6"
+    app_id = "wx54073d86056904da"
+    app_secret = "e102c09b6828c759084407bebc785b08 "
     r = requests.get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + app_id + "&secret=" + app_secret)
     if r.status_code == 200:
         return make_response(r.text)
