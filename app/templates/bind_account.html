@@ -21,18 +21,18 @@
                     <div class="weui_cell">
                         <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
                         <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="text" placeholder="请输入手机号"/>
+                            <input class="weui_input" type="text" name="phone" id="phone" placeholder="请输入手机号"/>
                         </div>
                     </div>
-                    <div class="weui_cell weui_vcode">
-                        <div class="weui_cell_hd"><label class="weui_label">验证码</label></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="text" placeholder="请输入验证码"/>
-                        </div>
-                        <div class="weui_cell_ft weui_vimg_wrp">
-                            <img src="/static/images/vcode.jpg" />
-                        </div>
-                    </div>
+{#                    <div class="weui_cell weui_vcode">#}
+{#                        <div class="weui_cell_hd"><label class="weui_label">验证码</label></div>#}
+{#                        <div class="weui_cell_bd weui_cell_primary">#}
+{#                            <input class="weui_input" type="text" placeholder="请输入验证码"/>#}
+{#                        </div>#}
+{#                        <div class="weui_cell_ft weui_vimg_wrp">#}
+{#                            <img src="/static/images/vcode.jpg" />#}
+{#                        </div>#}
+{#                    </div>#}
                     <div class="weui_cell">
                         <a href="javascript:;" class="weui_btn weui_btn_primary">提交</a>
                     </div>
@@ -40,8 +40,22 @@
             </div>
         </div>
     </div>
+    <script type=text/javascript>
+      $(function() {
+        $('#phone').bind('click', function() {
+          $.get($SCRIPT_ROOT + '/get_info', {
+            a: $('input[name="phone"]').val(),
+          }, function(data) {
+            alert(1);
+          });
+          return false;
+        });
+      });
+    </script>
     <!-- zepto.js was cached by wechat app -->
     <script src="https://res.wx.qq.com/open/libs/zepto/1.1.6/zepto.js"></script>
     <script src="/static/application.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
 </body>
 </html>
