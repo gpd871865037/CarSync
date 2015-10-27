@@ -16,7 +16,7 @@ def bind_account():
     code = request.args.get('code')
     data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx54073d86056904da&secret=e102c09b6828c759084407bebc785b08&code="+ code +"&grant_type=authorization_code")
     result = make_response(data.text)
-    return result['openid']
+    return data['openid']
     # user = User(weixin_id = 2,phone=123456)
     # db.session.add(user)
     # db.session.commit()
