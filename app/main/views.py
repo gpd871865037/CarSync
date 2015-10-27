@@ -1,6 +1,7 @@
 #coding:utf-8
 from flask import Flask, url_for, redirect
 from flask import request, make_response
+from urllib import urlencode
 from flask import render_template
 from . import main
 from models import User
@@ -12,10 +13,13 @@ import json
 
 @main.route('/bind_account')
 def bind_account():
+    code = request.args.get('code')
+    res = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx54073d86056904da&secret=e102c09b6828c759084407bebc785b08&code="+ code +"&grant_type=authorization_code")
+    return make_response(r.text)
     # user = User(weixin_id = 2,phone=123456)
     # db.session.add(user)
     # db.session.commit()
-    return render_template('bind_account.html')
+    #return render_template('bind_account.html')
 
 # @main.route('/get_info')
 # #def get_info():
