@@ -20,20 +20,21 @@ def bind_account():
     openid = result['openid']
     return render_template('bind_account.html',code=openid)
 
-# @main.route('/get_info', method=['POST'])
-# def get_info():
-#     openid = request.form("code")
-#     phone = request.form("phone")
-#     user = User.query.filter_by(weixin_id=openid).first()
-#     if user == None:
-#         times = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
-#         user = User(weixin_id = openid,phone = phone,created = times)
-#         db.session.add(user)
-#         db.session.commit()
-#         # if user.id != None:
-#         # #    return redirect()
-#         # else:
-#         #     flash("error")
+@main.route('/get_info', method=['POST'])
+def get_info():
+    openid = request.form("code")
+    phone = request.form("phone")
+    user = User.query.filter_by(weixin_id=openid).first()
+    if user == None:
+        times = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+        return times
+        # user = User(weixin_id = openid,phone = phone,created = times)
+        # db.session.add(user)
+        # db.session.commit()
+        # # if user.id != None:
+        # # #    return redirect()
+        # # else:
+        # #     flash("error")
 
 
 @main.route('/new_vehicle')
