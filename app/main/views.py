@@ -20,7 +20,7 @@ def bind_account():
     # openid = result['openid']
     # return render_template('bind_account.html', code=openid)
     #return type(str(openid.encode('utf-8')))
-    print type(result['openid'])
+    print type(result['openid'].encode('utf-8'))
     return result['openid']
 
 @main.route('/get_info', methods=['POST'])
