@@ -27,8 +27,8 @@ def bind_account():
 
 @main.route('/get_info', methods=['POST'])
 def get_info():
-    openid = request.form("code")
-    phone = request.form("phone")
+    openid = request.form["code"]
+    phone = request.form["phone"]
     user = User.query.filter_by(weixin_id=openid).first()
     if user == None:
         times = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
