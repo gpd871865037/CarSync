@@ -17,8 +17,8 @@ def bind_account():
     code = request.args.get('code')
     data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx54073d86056904da&secret=e102c09b6828c759084407bebc785b08&code="+ code +"&grant_type=authorization_code")
     result = json.loads(data.text)
-    return result['openid']
-    #return render_template('bind_account.html',code=code)
+    openid = result['openid']
+    return render_template('bind_account.html',code=openid)
 
 # @main.route('/get_info', method=['POST'])
 # def get_info():
