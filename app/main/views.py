@@ -52,20 +52,20 @@ def index_vehicle():
 
 @main.route('/check_signature')
 def check_signature():
-    # signature = request.args.get('signature')
-    # timestamp = request.args.get('timestamp')
-    # nonce = request.args.get('nonce')
-    # echostr = request.args.get('echostr')
-    #
-    # token = "QWIEKS9HAS128SDH3897SD10SD8132EJ"
-    # signature_list = sorted([token, timestamp, nonce])
-    # signature_str = ''.join(signature_list)
-    #
-    # if hashlib.sha1(signature_str).hexdigest() == signature:
-    #     return make_response(echostr)
-    # else:
-    #     return None
-    return redirect('/bind_account')
+    signature = request.args.get('signature')
+    timestamp = request.args.get('timestamp')
+    nonce = request.args.get('nonce')
+    echostr = request.args.get('echostr')
+
+    token = "QWIEKS9HAS128SDH3897SD10SD8132EJ"
+    signature_list = sorted([token, timestamp, nonce])
+    signature_str = ''.join(signature_list)
+
+    if hashlib.sha1(signature_str).hexdigest() == signature:
+        return make_response(echostr)
+    else:
+        return None
+    #return redirect('/bind_account')
 
 
 # FIXME 暂时先注释掉验证服务器的方法，转而接受微信的POST请求
