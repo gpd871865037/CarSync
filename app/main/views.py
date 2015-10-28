@@ -20,7 +20,7 @@ def bind_account():
     openid = result['openid']
     return render_template('bind_account.html',code=openid)
 
-@main.route('/get_info', method=['POST'])
+@main.route('/get_info', methods=['POST'])
 def get_info():
     openid = request.form("code")
     phone = request.form("phone")
