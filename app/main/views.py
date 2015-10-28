@@ -19,7 +19,7 @@ def bind_account():
     result = json.loads(data.text)
     openid = result['openid']
     # return render_template('bind_account.html',code=openid)
-    return type(openid)
+    return type(openid.encode('utf-8'))
 
 @main.route('/get_info', methods=['POST'])
 def get_info():
