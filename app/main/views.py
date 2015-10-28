@@ -32,7 +32,8 @@ def get_info():
     user = User.query.filter_by(weixin_id=openid).first()
     if user == None:
         times = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
-        user = User(weixin_id = openid,phone = phone,created_times = times)
+        created = time.strptime(times, '%Y-%m-%d %H:%M:%S')
+        user = User(weixin_id = openid,phone = phone,created_times = created)
         db.session.add(user)
         db.session.commit()
         if user.id != None:
