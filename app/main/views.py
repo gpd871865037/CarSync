@@ -30,10 +30,10 @@ def get_info():
         user = User(weixin_id = openid,phone = phone,created = times)
         db.session.add(user)
         db.session.commit()
-        if user.id != None:
-            return redirect()
-        else:
-            flash("error")
+        # if user.id != None:
+        # #    return redirect()
+        # else:
+        #     flash("error")
 
 
 @main.route('/new_vehicle')
