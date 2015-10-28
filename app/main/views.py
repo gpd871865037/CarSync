@@ -18,7 +18,7 @@ def bind_account():
     data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx54073d86056904da&secret=e102c09b6828c759084407bebc785b08&code="+ code +"&grant_type=authorization_code")
     result = json.loads(data.text)
     #key = 'openid'.decode('utf-8')
-    openid = dict.get('openid', result)
+    openid = result.get('openid')
     # print "====================================="
     # print "result[key] :",result[key]
     # print "type(result[key]) :",type(result[key])
