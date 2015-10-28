@@ -19,9 +19,11 @@ def bind_account():
     result = json.loads(data.text)
     key = 'openid'.encode('utf-8')
     openid = result[key].encode('utf-8')
-    print result
-    print type(result['openid'])
-    print type(openid)
+    print "====================================="
+    print "key :",type(key)
+    print "json :",result
+    print "result['openid'] :",type(result['openid'])
+    print "openid :",type(openid)
     return render_template('bind_account.html')
 
 @main.route('/get_info', methods=['POST'])
