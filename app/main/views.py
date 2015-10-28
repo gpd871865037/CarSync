@@ -34,15 +34,15 @@ def get_info():
         #times = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
         #created = time.strptime(times, '%Y-%m-%d %H:%M:%S')
         times = time.localtime(time.time())
-        return times
-        # user = User(weixin_id = openid,phone = phone,created_times = times)
-        # db.session.add(user)
-        # db.session.commit()
-        # if user.id != None:
-        # #    return redirect()
-        #     return "success"
-        # else:
-        #     flash("error")
+        print times
+        user = User(weixin_id = openid,phone = phone)
+        db.session.add(user)
+        db.session.commit()
+        if user.id != None:
+        #    return redirect()
+            return "success"
+        else:
+            flash("error")
 
 
 @main.route('/new_vehicle')
