@@ -18,18 +18,18 @@ def bind_account():
     data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx54073d86056904da&secret=e102c09b6828c759084407bebc785b08&code="+ code +"&grant_type=authorization_code")
     result = json.loads(data.text)
     openid = result['openid']
-    # return render_template('bind_account.html',code=openid)
+    return render_template('bind_account.html', code=openid)
     #return type(str(openid.encode('utf-8')))
-    return openid
+    #return openid
 
 @main.route('/get_info', methods=['POST'])
 def get_info():
     openid = request.form("code")
     phone = request.form("phone")
     user = User.query.filter_by(weixin_id=openid).first()
-    if user == None:
-        times = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
-        return times
+    # if user == None:
+    #     times = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+    #     return times
     return 'asdasaf'
         # user = User(weixin_id = openid,phone = phone,created = times)
         # db.session.add(user)
