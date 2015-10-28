@@ -40,7 +40,7 @@ def get_info():
         db.session.commit()
         if user.id != None:
         #    return redirect()
-            return user.id
+            return make_response(user)
         else:
             flash("error")
 
