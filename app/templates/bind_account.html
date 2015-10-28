@@ -18,8 +18,8 @@
             <div class="bd">
                 <div class="weui_cells_title">绑定帐号</div>
                 <div class="weui_cells weui_cells_form">
-                <form action="{{ url_for('get_info') }}" method="post">
-                    <input type="hidden" name="code" value="{{ openid }}"/>
+                <form action="gpdblog.cn/get_info" method="post">
+                    <input type="hidden" name="code" value="{{ code }}"/>
                     <div class="weui_cell">
                         <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
                         <div class="weui_cell_bd weui_cell_primary">
