@@ -28,6 +28,7 @@ def get_info():
     if user == None:
         times = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
         return times
+    return 'asdasaf'
         # user = User(weixin_id = openid,phone = phone,created = times)
         # db.session.add(user)
         # db.session.commit()
