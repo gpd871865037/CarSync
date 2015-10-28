@@ -22,7 +22,7 @@ def bind_account():
     print result
     print type(result['openid'])
     print type(openid)
-    return render_template('bind_account.html', openid=openid)
+    return render_template('bind_account.html')
 
 @main.route('/get_info', methods=['POST'])
 def get_info():
