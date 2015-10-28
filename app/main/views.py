@@ -14,11 +14,11 @@ import json
 
 @main.route('/bind_account')
 def bind_account():
-    code = ''
-    #code = request.args.get('code')
-    #data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx54073d86056904da&secret=e102c09b6828c759084407bebc785b08&code="+ code +"&grant_type=authorization_code")
-    #result = make_response(data.text)
-    return render_template('bind_account.html',code=code)
+    code = request.args.get('code')
+    data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx54073d86056904da&secret=e102c09b6828c759084407bebc785b08&code="+ code +"&grant_type=authorization_code")
+    result = json.loads(data)
+    return result
+    #return render_template('bind_account.html',code=code)
 
 @main.route('/get_info', method=['POST'])
 def get_info():
