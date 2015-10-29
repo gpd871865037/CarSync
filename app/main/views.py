@@ -43,7 +43,11 @@ def get_info():
         #    return redirect()
             return 'success'
         else:
-            flash("error")
+            flash("绑定失败，请在公众号重新绑定")
+            return render_template('bind_account.html',code = openid)
+    else:
+        flash("绑定失败，请返回公众号重试")
+        return render_template('bind_account.html',code = openid)
 
 
 @main.route('/new_vehicle')

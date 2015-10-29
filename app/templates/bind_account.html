@@ -4,11 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>绑定帐号 - CarSync - 个人车源发布专家</title>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
     <link rel="stylesheet" href="/static/weui.min.css"/>
     <link rel="stylesheet" href="/static/application.css"/>
     <link rel="stylesheet" href=""/>
 </head>
-<body ontouchstart>
+<body class="contouchstart">
     <div class="container js_container">
         <div class="page">
             <div class="hd">
