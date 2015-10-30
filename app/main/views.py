@@ -18,13 +18,8 @@ def bind_account():
     code = request.args.get('code')
     data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx54073d86056904da&secret=e102c09b6828c759084407bebc785b08&code="+ code +"&grant_type=authorization_code")
     result = json.loads(data.text)
-    #key = 'openid'.decode('utf-8')
     openid = result.get('openid')
-    # print "====================================="
-    # print "result[key] :",result[key]
-    # print "type(result[key]) :",type(result[key])
-    # print "openid :",type(openid)
-    return render_template('bind_account.html',code = openid)
+    return render_template('bind_account.html',code=openid)
 
 @main.route('/get_info', methods=['POST'])
 def get_info():
@@ -45,7 +40,7 @@ def get_info():
             flash("绑定失败，请在公众号重新绑定")
             return render_template('bind_account.html',code = openid)
     else:
-        flash("绑定失败，请返回公众号重试")
+        flash("账号已绑定，跳转到个人页面")
         return render_template('bind_account.html',code = openid)
 
 
