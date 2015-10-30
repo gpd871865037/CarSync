@@ -6,6 +6,7 @@ from flask import render_template
 from . import main
 from models import User
 from models import db
+import datetime
 import requests
 import time
 import hashlib
@@ -17,30 +18,30 @@ def bind_account():
     code = request.args.get('code')
     data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx54073d86056904da&secret=e102c09b6828c759084407bebc785b08&code="+ code +"&grant_type=authorization_code")
     result = json.loads(data.text)
-    #key = 'openid'.decode('utf-8')
     openid = result.get('openid')
-    # print "====================================="
-    # print "result[key] :",result[key]
-    # print "type(result[key]) :",type(result[key])
-    # print "openid :",type(openid)
-    return render_template('bind_account.html',code = openid)
+    return render_template('bind_account.html',code=openid)
 
 @main.route('/get_info', methods=['POST'])
 def get_info():
-    openid = request.form("code")
-    phone = request.form("phone")
+    openid = request.form["code"]
+    phone = request.form["phone"]
     user = User.query.filter_by(weixin_id=openid).first()
-    # if user == None:
-    #     times = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
-    #     return times
-    return 'asdasaf'
-        # user = User(weixin_id = openid,phone = phone,created = times)
-        # db.session.add(user)
-        # db.session.commit()
-        # # if user.id != None:
-        # # #    return redirect()
-        # # else:
-        # #     flash("error")
+    if user == None:
+        #times = datetime.datetime(time.localtime(time.time()))
+        #created = time.strptime(times, '%Y-%m-%d %H:%M:%S')
+        times = datetime.datetime.now()
+        user = User(weixin_id = openid,phone = phone,created_times=times)
+        db.session.add(user)
+        db.session.commit()
+        if user.id != None:
+        #    return redirect()
+            return 'success'
+        else:
+            flash("绑定失败，请在公众号重新绑定")
+            return render_template('bind_account.html',code = openid)
+    else:
+        flash("账号已绑定，跳转到个人页面")
+        return render_template('bind_account.html',code = openid)
 
 
 @main.route('/new_vehicle')
