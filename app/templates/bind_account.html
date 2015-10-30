@@ -41,6 +41,7 @@
 {#                            <img src="/static/images/vcode.jpg" />#}
 {#                        </div>#}
 {#                    </div>#}
+                <!-- TODO 注意处理html之间的缩进 -->
                 <div class="weui_btn_area">
                     <input type="submit" class="weui_btn weui_btn_primary" value="确定" />
                 </div>
@@ -52,9 +53,11 @@
     <script type=text/javascript>
       $(function() {
         $('#phone').bind('click', function() {
+          // TODO 表单提交不要用get，一律用post
           $.get($SCRIPT_ROOT + '/get_info', {
-            a: $('input[name="phone"]').val(),
+            a: $('input[name="phone"]').val()
           }, function(data) {
+            // TODO 返回内容，即使是debug的内容，使用console.log('1')这样来打印，不要用alert。
             alert(1);
           });
           return false;
@@ -64,6 +67,8 @@
     <!-- zepto.js was cached by wechat app -->
     <script src="https://res.wx.qq.com/open/libs/zepto/1.1.6/zepto.js"></script>
     <script src="/static/application.js"></script>
+
+    <!-- TODO 这个地方是何意义？为何不直接载入jQuery？ -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>
     <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
 </body>
