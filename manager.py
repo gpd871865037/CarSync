@@ -4,12 +4,10 @@ import os
 from app import create_app, db
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
-from flask.ext.bootstrap import Bootstrap
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 manager = Manager(app)
 migrate = Migrate(app, db)
-bootstrap = Bootstrap(app)
 
 
 def make_shell_context():
