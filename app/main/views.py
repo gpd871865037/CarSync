@@ -18,7 +18,9 @@ import json
 @main.route('/bind_account')
 def bind_account():
     code = request.args.get('code')
-    data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx54073d86056904da&secret=e102c09b6828c759084407bebc785b08&code="+ code +"&grant_type=authorization_code")
+    appid = "wx54073d86056904da"
+    secret = "e102c09b6828c759084407bebc785b08&code"
+    data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
     result = json.loads(data.text)
     openid = result.get('openid')
     return render_template('bind_account.html',code=openid)
@@ -32,27 +34,27 @@ def get_info():
     # TODO 除了字符串、整型等简单类型可以用＝＝来判断外，复杂类型如对象类型None类型一律使用equals判断。如user.equals(None)
     if user.equals(None):
         # TODO 注释必须以 #+空格 开头
-        #times = datetime.datetime(time.localtime(time.time()))
-        #created = time.strptime(times, '%Y-%m-%d %H:%M:%S')
+        # times = datetime.datetime(time.localtime(time.time()))
+        # created = time.strptime(times, '%Y-%m-%d %H:%M:%S')
         times = datetime.datetime.now()
         # TODO 方法里给指定参数传值，＝的左右不需要空格，如code=openid
         # TODO 方法里给参数传值，参数与参数之间的,逗号之后加一个空格，如User(weixin_id=openid, phone=phone)
-        user = User(weixin_id = openid,phone = phone,created_times=times)
+        user = User(weixin_id=openid, phone=phone, created_times=times)
         db.session.add(user)
         db.session.commit()
         # TODO 修改意见同上
-        if user.id != None:
+        if user.equals(None):
             # TODO 无效的行删掉，同上，注释以 #+空格 开头，紧贴语句
-        #    return redirect()
+            # return redirect()
             return 'success'
         else:
             flash("绑定失败，请在公众号重新绑定")
             # TODO 方法里给指定参数传值，＝的左右不需要空格，如code=openid
-            return render_template('bind_account.html',code = openid)
+            return render_template('bind_account.html', code=openid)
     else:
         flash("账号已绑定，跳转到个人页面")
         # TODO 同上
-        return render_template('bind_account.html',code = openid)
+        return render_template('bind_account.html', code=openid)
 
 
 @main.route('/new_vehicle')
