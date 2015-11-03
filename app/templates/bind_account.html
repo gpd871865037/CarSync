@@ -6,7 +6,6 @@
     <title>绑定帐号 - CarSync - 个人车源发布专家</title>
     <link rel="stylesheet" href="/static/weui.min.css"/>
     <link rel="stylesheet" href="/static/application.css"/>
-    <link rel="stylesheet" href=""/>
 </head>
 <body class="contouchstart">
     <div class="container js_container">
@@ -24,52 +23,51 @@
             <div class="bd">
                 <div class="weui_cells_title">绑定帐号</div>
                 <div class="weui_cells weui_cells_form">
-                <form action="get_info" method="post">
-                    <input type="hidden" name="code" value="{{ code }}"/>
-                    <div class="weui_cell">
-                        <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="text" name="phone" id="phone" placeholder="请输入手机号"/>
+                    <form action="get_info" method="post">
+                        <input type="hidden" name="code" value="{{ code }}"/>
+                        <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input class="weui_input" type="text" name="phone" id="phone" placeholder="请输入手机号"/>
+                            </div>
                         </div>
-                    </div>
-{#                    <div class="weui_cell weui_vcode">#}
-{#                        <div class="weui_cell_hd"><label class="weui_label">验证码</label></div>#}
-{#                        <div class="weui_cell_bd weui_cell_primary">#}
-{#                            <input class="weui_input" type="text" placeholder="请输入验证码"/>#}
-{#                        </div>#}
-{#                        <div class="weui_cell_ft weui_vimg_wrp">#}
-{#                            <img src="/static/images/vcode.jpg" />#}
-{#                        </div>#}
-{#                    </div>#}
-                <!-- TODO 注意处理html之间的缩进 -->
-                <div class="weui_btn_area">
-                    <input type="submit" class="weui_btn weui_btn_primary" value="确定" />
-                </div>
-                </form>
+    {#                    <div class="weui_cell weui_vcode">#}
+    {#                        <div class="weui_cell_hd"><label class="weui_label">验证码</label></div>#}
+    {#                        <div class="weui_cell_bd weui_cell_primary">#}
+    {#                            <input class="weui_input" type="text" placeholder="请输入验证码"/>#}
+    {#                        </div>#}
+    {#                        <div class="weui_cell_ft weui_vimg_wrp">#}
+    {#                            <img src="/static/images/vcode.jpg" />#}
+    {#                        </div>#}
+    {#                    </div>#}
+                    <!-- TODO 注意处理html之间的缩进 -->
+                        <div class="weui_btn_area">
+                            <input type="submit" class="weui_btn weui_btn_primary" value="确定" />
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <script type=text/javascript>
-      $(function() {
-        $('#phone').bind('click', function() {
-          // TODO 表单提交不要用get，一律用post
-          $.get($SCRIPT_ROOT + '/get_info', {
-            a: $('input[name="phone"]').val()
-          }, function(data) {
-            // TODO 返回内容，即使是debug的内容，使用console.log('1')这样来打印，不要用alert。
-            alert(1);
-          });
-          return false;
-        });
-      });
-    </script>
+{#    <script type=text/javascript>#}
+{#      $(function() {#}
+{#        $('#phone').bind('click', function() {#}
+{#          // TODO 表单提交不要用get，一律用post#}
+{#          $.post($SCRIPT_ROOT + '/get_info', {#}
+{#            a: $('input[name="phone"]').val()#}
+{#          }, function(data) {#}
+{#            // TODO 返回内容，即使是debug的内容，使用console.log('1')这样来打印，不要用alert。#}
+{#            console.log('1')
+{#          });#}
+{#          return false;#}
+{#        });#}
+{#      });#}
+{#    </script>#}
     <!-- zepto.js was cached by wechat app -->
     <script src="https://res.wx.qq.com/open/libs/zepto/1.1.6/zepto.js"></script>
     <script src="/static/application.js"></script>
 
     <!-- TODO 这个地方是何意义？为何不直接载入jQuery？ -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+    <script src="/static/jquery-2.1.4.min.js"></script>
 </body>
 </html>
