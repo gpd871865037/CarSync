@@ -92,3 +92,6 @@ def get_access_token():
         return None
 
 
+@main.route('/post_car')
+def post_car():
+    return render_template('post_car.html')
