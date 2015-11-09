@@ -21,6 +21,15 @@ class User(db.Model):
     updated_times = db.Column(db.DATETIME)
     deleted_times = db.Column(db.DATETIME)
 
+class Car(db.Model):
+    __tablename__ = 'cars'
+    id = db.Column(db.Integer, primary_key=True)
+    brand_id = db.Column(db.Integer)
+    brand = db.Column(db.String)
+    car_id = db.Column(db.Integer)
+    car =  db.Column(db.String)
+    model_id = db.Column(db.Integer)
+    model  =  db.Column(db.String)
 
     def repr(self):
         return '<User %r>' % self.username

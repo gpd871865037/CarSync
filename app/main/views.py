@@ -4,7 +4,7 @@ from flask import request, make_response
 from urllib import urlencode
 from flask import render_template
 from . import main
-from models import User
+from models import User, Car
 from models import db
 import datetime
 import requests
@@ -94,4 +94,24 @@ def get_access_token():
 
 @main.route('/post_car')
 def post_car():
-    return render_template('post_car.html')
+    car = Car.query.first();
+    return render_template('post_car.html', car=car)
+
+
+@main.route('/insert_car')
+def insert_car():
+    f = open('cars.json','r')
+    carlist = f.read()
+    f.close()
+    cars = json.loads(carlist)
+    print "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+    i = 0
+    for x in cars:
+        print x['id'],x["Brand_id"],x["Brand"],x["Car_id"],x["Car"],x["Model_id"],x["Model"]
+        car = Car(brand_id=x["Brand_id"], brand=x["Brand"], car_id=x["Car_id"], car=x["Car"], model_id=x["Model_id"], model=x["Model"])
+        db.session.add(car)
+        db.session.commit()
+        if i > 1000:
+            break
+        i += 1
+    return "1"

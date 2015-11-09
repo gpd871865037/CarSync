@@ -26,314 +26,182 @@
                     <form action="get_info" method="post">
                         <input type="hidden" name="code" value="{{ code }}"/>
                         <div class="weui_cell weui_cell_select weui_select_after">
-                        <div class="weui_cell_hd">
-                            品牌
+                            <div class="weui_cell_hd">
+                                品牌
+                            </div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <select class="weui_select" name="select2">
+                                    <option value="1">长城</option>
+                                    <option value="2">大众</option>
+                                    <option value="3">奥迪</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <select class="weui_select" name="select2">
-                                <option value="1">长城</option>
-                                <option value="2">大众</option>
-                                <option value="3">奥迪</option>
-                            </select>
-                        </div>
-                    </div>
                         <div class="weui_cell weui_cell_select weui_select_after">
-                        <div class="weui_cell_hd">
-                            车型
+                            <div class="weui_cell_hd">
+                                车型
+                            </div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <select class="weui_select" name="select2">
+                                    <option value="1">A1</option>
+                                    <option value="2">A2</option>
+                                    <option value="3">A3</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <select class="weui_select" name="select2">
-                                <option value="1">A1</option>
-                                <option value="2">A2</option>
-                                <option value="3">A3</option>
-                            </select>
-                        </div>
-                    </div>
                         <div class="weui_cell weui_cell_select weui_select_after">
-                        <div class="weui_cell_hd">
-                            车系
-                        </div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <select class="weui_select" name="select2">
-                                <option value="1">2008款 1.8T 手自一体 个性风格版</option>
-                                <option value="2">2008款 2.0T 自动 豪华型</option>
-                                <option value="3">2008款 1.8T 手动 舒适型</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="weui_cells_title">车辆颜色</div>
-                    <div class="weui_cells weui_cells_radio">
-                        <label class="weui_cell weui_check_label" for="x11">
+                            <div class="weui_cell_hd">
+                                车系
+                            </div>
                             <div class="weui_cell_bd weui_cell_primary">
-                                <p>红</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" class="weui_check" name="radio1" id="x11">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x12">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>黄</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x12" checked="checked">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x13">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>黑</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x13">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x14">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>白</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x14">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x15">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>蓝</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x15">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x16">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>绿</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x16">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x17">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>灰</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x17">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x18">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>紫</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x18">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x19">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>金</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x19">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x20">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>橙</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x20">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x21">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>棕</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x21">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x22">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>青</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x22">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x23">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>栗</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x23">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x24">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>米</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x24">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x25">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>银</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x25">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x26">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>褐</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x26">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x27">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>其他</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x27">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="weui_cells_title">首次上牌时间</div>
-                    <div class="weui_cell">
-                        <div class="weui_cell_hd"><label for="" class="weui_label">时间</label></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="date" value="">
-                        </div>
-                    </div>
-                    <div class="weui_cells_title">是否定期4S店保养</div>
-                    <div class="weui_cells weui_cells_radio">
-                        <label class="weui_cell weui_check_label" for="x28">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>是</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" class="weui_check" name="radio1" id="x28">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x29">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>否</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x29" checked="checked">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="weui_cells_title">有无重大事故</div>
-                    <div class="weui_cells weui_cells_radio">
-                        <label class="weui_cell weui_check_label" for="x30">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>是</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" class="weui_check" name="radio1" id="x30">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                        <label class="weui_cell weui_check_label" for="x31">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>否</p>
-                            </div>
-                            <div class="weui_cell_ft">
-                                <input type="radio" name="radio1" class="weui_check" id="x31" checked="checked">
-                                <span class="weui_icon_checked"></span>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="weui_cells_title">年检到期</div>
-                    <div class="weui_cell">
-                        <div class="weui_cell_hd"><label for="" class="weui_label">时间</label></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="date" value="">
-                        </div>
-                    </div>
-                    <div class="weui_cells_title">交强险到期</div>
-                    <div class="weui_cell">
-                        <div class="weui_cell_hd"><label for="" class="weui_label">时间</label></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="date" value="">
-                        </div>
-                    </div>
-                    <div class="weui_cells_title">商业险到期</div>
-                    <div class="weui_cell">
-                        <div class="weui_cell_hd"><label for="" class="weui_label">时间</label></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="date" value="">
-                        </div>
-                    </div>
-
-
-                    <div class="weui_cell">
-                        <div class="weui_cell_hd"><label class="weui_label">行驶里程</label></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="number" placeholder="请填写里程">
-                        </div>
-                    </div>
-                    <div class="weui_cell">
-                        <div class="weui_cell_hd"><label class="weui_label">转让价格</label></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="number" placeholder="请填写价格">
-                        </div>
-                    </div>
-                    <div class="weui_cell">
-                        <div class="weui_cell_hd"><label class="weui_label">标题</label></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="number" placeholder="请填写标题">
-                        </div>
-                    </div>
-                    <div class="weui_cell">
-                        <div class="weui_cell_hd"><label class="weui_label">描述</label></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="number" placeholder="一句话广告">
-                        </div>
-                    </div>
-                    <div class="weui_cells_title">补充说明</div>
-                    <div class="weui_cells weui_cells_form">
-                    <div class="weui_cell">
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <textarea class="weui_textarea" placeholder="请输入补充说明"></textarea>
+                                <select class="weui_select" name="select2">
+                                    <option value="1">2008款 1.8T 手自一体 个性风格版</option>
+                                    <option value="2">2008款 2.0T 自动 豪华型</option>
+                                    <option value="3">2008款 1.8T 手动 舒适型</option>
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="weui_cell">
-                        <div class="weui_cell_hd"><label class="weui_label">联系人</label></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="number" placeholder="请填写联系人">
+                        <div class="weui_cell weui_cell_select weui_select_after">
+                            <div class="weui_cell_hd">
+                                颜色
+                            </div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <select class="weui_select" name="select2">
+                                    <option value="1">红</option>
+                                    <option value="2">黄</option>
+                                    <option value="3">黑</option>
+                                    <option value="4">白</option>
+                                    <option value="5">蓝</option>
+                                    <option value="6">绿</option>
+                                    <option value="7">灰</option>
+                                    <option value="8">紫</option>
+                                    <option value="9">金</option>
+                                    <option value="10">橙</option>
+                                    <option value="11">棕</option>
+                                    <option value="12">青</option>
+                                    <option value="13">栗</option>
+                                    <option value="14">米</option>
+                                    <option value="15">银</option>
+                                    <option value="16">褐</option>
+                                    <option value="17">其他</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="weui_cell">
-                        <div class="weui_cell_hd"><label class="weui_label">联系电话</label></div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="number" placeholder="请填写联系电话">
+                        <div class="weui_cells_title">首次上牌时间</div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_hd"><label for="" class="weui_label">时间</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input class="weui_input" type="date" value="">
+                            </div>
                         </div>
-                    </div>
-                    <!-- TODO 注意处理html之间的缩进 -->
+                        <div class="weui_cells_title">是否定期4S店保养</div>
+                        <div class="weui_cells weui_cells_radio">
+                            <label class="weui_cell weui_check_label" for="x28">
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <p>是</p>
+                                </div>
+                                <div class="weui_cell_ft">
+                                    <input type="radio" class="weui_check" name="radio1" id="x28">
+                                    <span class="weui_icon_checked"></span>
+                                </div>
+                            </label>
+                            <label class="weui_cell weui_check_label" for="x29">
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <p>否</p>
+                                </div>
+                                <div class="weui_cell_ft">
+                                    <input type="radio" name="radio1" class="weui_check" id="x29" checked="checked">
+                                    <span class="weui_icon_checked"></span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="weui_cells_title">有无重大事故</div>
+                        <div class="weui_cells weui_cells_radio">
+                            <label class="weui_cell weui_check_label" for="x30">
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <p>是</p>
+                                </div>
+                                <div class="weui_cell_ft">
+                                    <input type="radio" class="weui_check" name="radio1" id="x30">
+                                    <span class="weui_icon_checked"></span>
+                                </div>
+                            </label>
+                            <label class="weui_cell weui_check_label" for="x31">
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <p>否</p>
+                                </div>
+                                <div class="weui_cell_ft">
+                                    <input type="radio" name="radio1" class="weui_check" id="x31" checked="checked">
+                                    <span class="weui_icon_checked"></span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="weui_cells_title">年检到期</div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_hd"><label for="" class="weui_label">时间</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input class="weui_input" type="date" value="">
+                            </div>
+                        </div>
+                        <div class="weui_cells_title">交强险到期</div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_hd"><label for="" class="weui_label">时间</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input class="weui_input" type="date" value="">
+                            </div>
+                        </div>
+                        <div class="weui_cells_title">商业险到期</div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_hd"><label for="" class="weui_label">时间</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input class="weui_input" type="date" value="">
+                            </div>
+                        </div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">行驶里程</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input class="weui_input" type="text" placeholder="请填写里程">
+                            </div>
+                        </div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">转让价格</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input class="weui_input" type="text" placeholder="请填写价格">
+                            </div>
+                        </div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">标题</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input class="weui_input" type="text" placeholder="请填写标题">
+                            </div>
+                        </div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">描述</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input class="weui_input" type="text" placeholder="一句话广告">
+                            </div>
+                        </div>
+                        <div class="weui_cells_title">补充说明</div>
+                        <div class="weui_cells weui_cells_form">
+                        <div class="weui_cell">
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <textarea class="weui_textarea" placeholder="请输入补充说明"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">联系人</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input class="weui_input" type="text" placeholder="请填写联系人">
+                            </div>
+                        </div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">联系电话</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input class="weui_input" type="text" placeholder="请填写联系电话">
+                            </div>
+                        </div>
+                        <!-- TODO 注意处理html之间的缩进 -->
                         <div class="weui_btn_area">
                             <input type="submit" class="weui_btn weui_btn_primary" value="确定" />
                         </div>
