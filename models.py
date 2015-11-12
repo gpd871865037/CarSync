@@ -12,6 +12,7 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
 db = SQLAlchemy(app)
 
+
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -20,6 +21,9 @@ class User(db.Model):
     created_times = db.Column(db.DATETIME)
     updated_times = db.Column(db.DATETIME)
     deleted_times = db.Column(db.DATETIME)
+
+    def repr(self):
+        return '<User %r>' % self.username
 
 class Car(db.Model):
     __tablename__ = 'cars'
@@ -33,3 +37,15 @@ class Car(db.Model):
 
     def repr(self):
         return '<User %r>' % self.username
+
+    @property
+    def serialize(self):
+       return {
+           'id'      : self.id,
+           'brand_id': self.brand_id,
+           'brand'   : self.brand,
+           'car_id'  : self.car_id,
+           'car'     : self.car,
+           'model_id': self.model_id,
+           'model'   : self.model
+       }

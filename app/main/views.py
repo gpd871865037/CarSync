@@ -1,12 +1,12 @@
 #coding:utf-8
-from flask import Flask, url_for, redirect,flash
+from flask import Flask, url_for, redirect, flash, jsonify
 from flask import request, make_response
 from urllib import urlencode
 from flask import render_template
 from . import main
 from models import User, Car
 from models import db
-import datetime
+import datetime, httplib
 import requests
 import time
 import hashlib
@@ -94,8 +94,8 @@ def get_access_token():
 
 @main.route('/post_car')
 def post_car():
-    car = Car.query.first();
-    return render_template('post_car.html', car=car)
+    cars = Car.query.group_by("brand").all();
+    return render_template('post_car.html', cars=cars)
 
 
 @main.route('/insert_car')
@@ -115,3 +115,20 @@ def insert_car():
             break
         i += 1
     return "1"
+
+
+@main.route('/get_car', methods=['POST'])
+def get_car():
+    brand = request.form["brand"]
+    data = Car.query.filter_by(brand_id=brand).group_by("car").all()
+    return jsonify(json_list=[i.serialize for i in data])
+
+
+@main.route('/get_model', methods=['POST'])
+def get_model():
+    model = request.form["model"]
+    data = Car.query.filter_by(model_id=model).group_by("model").all()
+    print "======================================"
+    print model
+    print data
+    return jsonify(json_list=[i.serialize for i in data])
