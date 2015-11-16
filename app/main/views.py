@@ -46,7 +46,6 @@ def get_info():
             flash("绑定失败，请在公众号重新绑定")
             return render_template('bind_account.html', code=openid)
     else:
-        flash("账号已绑定，跳转到个人页面")
         return render_template('bind_account.html', code=openid)
 
 
