@@ -104,10 +104,9 @@ def post_car():
     result = json.loads(data.text)
     openid = result.get('openid')
 
-    user = User.query.filter_by(weixin_id=openid).first()
-    if user is None:
-        flash("账号未绑定")
-        return render_template('post_car.html')
+    print "===================================================="
+    print openid
+    print "=======================================================+"
     cars = Car.query.group_by("brand").all()
     return render_template('post_car.html', cars=cars, code=openid)
 
