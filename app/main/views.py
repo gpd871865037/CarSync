@@ -46,7 +46,7 @@ def get_info():
             flash("绑定失败，请在公众号重新绑定")
             return render_template('bind_account.html', code=openid)
     else:
-        return render_template('bind_account.html', code=openid)
+        return "已经绑定过"
 
 
 @main.route('/new_vehicle')
