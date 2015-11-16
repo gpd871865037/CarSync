@@ -30,7 +30,7 @@ def get_info():
     phone = request.form["phone"]
     user = User.query.filter_by(weixin_id=openid).first()
 
-    if user is None:
+    if user == None:
         # times = datetime.datetime(time.localtime(time.time()))
         # created = time.strptime(times, '%Y-%m-%d %H:%M:%S')
         times = datetime.datetime.now()
@@ -39,7 +39,7 @@ def get_info():
         db.session.add(user)
         db.session.commit()
 
-        if user is not None:
+        if user != None:
             # return redirect()
             return 'success'
         else:
