@@ -42,7 +42,7 @@ def get_info():
         db.session.add(user)
         db.session.commit()
 
-        if user != None:
+        if user is not None:
             # return redirect()
             return 'success'
         else:
