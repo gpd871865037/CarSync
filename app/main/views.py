@@ -24,6 +24,8 @@ def bind_account():
     data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
     result = json.loads(data.text)
     openid = result.get('openid')
+    print "========================++++++++++++"
+    print data.text
     return render_template('bind_account.html', code=openid)
 
 
@@ -105,7 +107,7 @@ def post_car():
     openid = result.get('openid')
 
     print "===================================================="
-    print data.text
+    print appid
     print "=======================================================+"
     cars = Car.query.group_by("brand").all()
     return render_template('post_car.html', cars=cars, code=openid)
