@@ -21,11 +21,11 @@ def bind_account():
     code = request.args.get('code')
     appid = "wx54073d86056904da"
     secret = "e102c09b6828c759084407bebc785b08&code"
-    data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
+    data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
     result = json.loads(data.text)
     openid = result.get('openid')
     print "========================++++++++++++"
-    print code
+    print openid
     return render_template('bind_account.html', code=openid)
 
 
