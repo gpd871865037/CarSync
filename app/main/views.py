@@ -33,7 +33,7 @@ def get_info():
     phone = request.form["phone"]
     user = User.query.filter_by(weixin_id=openid).first()
 
-    if user == None:
+    if user is None:
         # times = datetime.datetime(time.localtime(time.time()))
         # created = time.strptime(times, '%Y-%m-%d %H:%M:%S')
         times = datetime.datetime.now()
