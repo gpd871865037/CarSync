@@ -105,7 +105,7 @@ def post_car():
     openid = result.get('openid')
 
     print "===================================================="
-    print openid
+    print data.text
     print "=======================================================+"
     cars = Car.query.group_by("brand").all()
     return render_template('post_car.html', cars=cars, code=openid)
