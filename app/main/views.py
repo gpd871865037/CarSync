@@ -25,7 +25,7 @@ def bind_account():
     result = json.loads(data.text)
     openid = result.get('openid')
     print "========================++++++++++++"
-    print data.text
+    print openid
     return render_template('bind_account.html', code=openid)
 
 
