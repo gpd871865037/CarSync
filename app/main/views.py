@@ -30,7 +30,7 @@ def get_info():
     phone = request.form["phone"]
     user = User.query.filter_by(weixin_id=openid).first()
 
-    if user.equals(None):
+    if user is None:
         # times = datetime.datetime(time.localtime(time.time()))
         # created = time.strptime(times, '%Y-%m-%d %H:%M:%S')
         times = datetime.datetime.now()
@@ -39,7 +39,7 @@ def get_info():
         db.session.add(user)
         db.session.commit()
 
-        if not user.equals(None):
+        if user is not None:
             # return redirect()
             return 'success'
         else:
@@ -102,7 +102,7 @@ def post_car():
     openid = result.get('openid')
 
     user = User.query.filter_by(weixin_id=openid).first()
-    if user.equals(None):
+    if user is None:
         flash("账号未绑定")
         return render_template('post_car.html')
     cars = Car.query.group_by("brand").all()
@@ -171,7 +171,7 @@ def post_car_information():
     db.session.add(car_info)
     db.session.commit()
 
-    if not car_info.id.equals(None):
+    if car_info.id is not None:
         return 'success'
     else:
         flash("发布失败，请重新发布")
