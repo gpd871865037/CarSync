@@ -49,3 +49,29 @@ class Car(db.Model):
            'model_id': self.model_id,
            'model'   : self.model
        }
+
+
+class Car_info(db.Model):
+    __tablename__ = 'car_info'
+    id = db.Column(db.Integer, primary_key=True)
+    weixin_id = db.Column(db.Integer, index=True)
+    brand_id = db.Column(db.Integer)
+    car_id = db.Column(db.Integer)
+    model_id = db.Column(db.Integer)
+    color = db.Column(db.String)
+    first_license_time = db.Column(db.DATETIME)
+    maintenance = db.Column(db.Integer)
+    accident = db.Column(db.Integer)
+    inspection = db.Column(db.DATETIME)
+    compulsory_insurance = db.Column(db.DATETIME)
+    commercial_insurance = db.Column(db.DATETIME)
+    mileage = db.Column(db.Integer)
+    price = db.Column(db.Integer)
+    title = db.Column(db.String)
+    description = db.Column(db.String)
+    information = db.Column(db.String)
+    contacts = db.Column(db.String)
+    contact_number = db.Column(db.String)
+
+    def repr(self):
+        return '<User %r>' % self.username
