@@ -6,9 +6,8 @@ from flask import render_template
 from . import main
 from models import User, Car, Car_info
 from models import db
-import datetime, httplib
+from datetime import datetime, date, time
 import requests
-import time
 import hashlib
 import json
 import sys
@@ -97,19 +96,19 @@ def get_access_token():
 
 @main.route('/post_car')
 def post_car():
-    code = request.args.get('code')
-    appid = "wx54073d86056904da"
-    secret = "e102c09b6828c759084407bebc785b08&code"
-    data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
-    result = json.loads(data.text)
-    openid = result.get('openid')
+    # code = request.args.get('code')
+    # appid = "wx54073d86056904da"
+    # secret = "e102c09b6828c759084407bebc785b08&code"
+    # data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
+    # result = json.loads(data.text)
+    # openid = result.get('openid')
 
-    user = User.query.filter_by(weixin_id=openid).first()
-    if user is None:
-        flash("账号未绑定")
-        return render_template('post_car.html')
+    # user = User.query.filter_by(weixin_id=openid).first()
+    # if user is None:
+    #     flash("账号未绑定")
+    #     return render_template('post_car.html')
     cars = Car.query.group_by("brand").all()
-    return render_template('post_car.html', cars=cars, code=openid)
+    return render_template('post_car.html', cars=cars)
 
 
 @main.route('/insert_car')
@@ -140,26 +139,24 @@ def get_car():
 @main.route('/get_model', methods=['POST'])
 def get_model():
     model = request.form["model"]
-    data = Car.query.filter_by(model_id=model).group_by("model").all()
-    print "======================================"
-    print model
-    print data
+    data = Car.query.filter_by(car_id=model).group_by("model").all()
     return jsonify(json_list=[i.serialize for i in data])
 
 
 @main.route('/post_car_information', methods=['POST'])
 def post_car_information():
-    openid = request.form["code"]
+    # openid = request.form["code"]
+    openid = "asdasdsdfds"
     brand_id = request.form["brand"]
     car_id = request.form["car"]
     model_id = request.form["model"]
     color = request.form["color"]
-    first_license_time = request.form["first_license_time"]
+    first_license_time = datetime.strptime(request.form["first_license_time"], "%Y-%m-%d")
     maintenance = request.form["maintenance"]
     accident = request.form["accident"]
-    inspection = request.form["inspection"]
-    compulsory_insurance = request.form["compulsory_insurance"]
-    commercial_insurance = request.form["commercial_insurance"]
+    inspection = datetime.strptime(request.form["inspection"], "%Y-%m-%d")
+    compulsory_insurance = datetime.strptime(request.form["compulsory_insurance"], "%Y-%m-%d")
+    commercial_insurance = datetime.strptime(request.form["commercial_insurance"], "%Y-%m-%d")
     mileage = request.form["mileage"]
     price = request.form["price"]
     title = request.form["title"]
@@ -168,8 +165,8 @@ def post_car_information():
     contacts = request.form["contacts"]
     contact_number = request.form["contact_number"]
 
-    car_info = Car_info(weixin_id=openid,brand_id=brand_id, car_id=car_id, model_id=model_id, color=color, first_license_time=first_license_time, maintenance=maintenance,
-                        accident=accident, inspection=inspection, compulsory_insurance=compulsory_insurance, commercial_insurance=commercial_insurance, mileage=mileage,
+    car_info = Car_info(weixin_id=openid, brand_id=brand_id, car_id=car_id, model_id=model_id, color=color, first_license_time=first_license_time, maintenance=maintenance,
+                        accident=accident, mileage=mileage, inspection=inspection, compulsory_insurance=compulsory_insurance, commercial_insurance=commercial_insurance,
                         price=price, title=title,description=description, information=information, contacts=contacts, contact_number=contact_number)
     db.session.add(car_info)
     db.session.commit()
