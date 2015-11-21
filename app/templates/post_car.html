@@ -243,6 +243,16 @@
         function success(stream) {
                  video_element.src =stream;
         }
+
+         var canvas =document.createElement('canvas');
+
+         var ctx = canvas.getContext('2d');
+         var cw = vw;
+         var ch = vh;
+         ctx.fillStyle = "#ffffff";
+         ctx.fillRect(0, 0, cw, ch);
+         ctx.drawImage(video_element, 0, 0, vvw,vvh, 0,0, vw,vh);
+         document.body.append(canvas);
     </script>
     <!-- TODO 这个地方是何意义？为何不直接载入jQuery？ -->
     <script src="/static/jquery-2.1.4.min.js"></script>
