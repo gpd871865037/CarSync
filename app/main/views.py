@@ -96,17 +96,17 @@ def get_access_token():
 
 @main.route('/post_car')
 def post_car():
-    code = request.args.get('code')
-    appid = "wx54073d86056904da"
-    secret = "e102c09b6828c759084407bebc785b08&code"
-    data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
-    result = json.loads(data.text)
-    openid = result.get('openid')
-
-    user = User.query.filter_by(weixin_id=openid).first()
-    if user is None:
-        flash("账号未绑定")
-        return render_template('post_car.html')
+    # code = request.args.get('code')
+    # appid = "wx54073d86056904da"
+    # secret = "e102c09b6828c759084407bebc785b08&code"
+    # data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
+    # result = json.loads(data.text)
+    # openid = result.get('openid')
+    #
+    # user = User.query.filter_by(weixin_id=openid).first()
+    # if user is None:
+    #     flash("账号未绑定")
+    #     return render_template('post_car.html')
     cars = Car.query.group_by("brand").all()
     return render_template('post_car.html', cars=cars)
 

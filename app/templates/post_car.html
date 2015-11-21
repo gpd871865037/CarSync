@@ -155,9 +155,10 @@
                          <div class="weui_cell">
                             <div class="weui_cell_hd"><label class="weui_label">拍照</label></div>
                             <div class="weui_cell_bd weui_cell_primary">
-                                <video id="video" autoplay></video>
-                                <button id="snap">Snap Photo</button>
-                                <canvas id="canvas"></canvas>
+                                <input type="file" accept="image/*;capture=camera">
+{#                                <video id="video" autoplay></video>#}
+{#                                <button id="snap">Snap Photo</button>#}
+{#                                <canvas id="canvas"></canvas>#}
                             </div>
                         </div>
                         <div class="weui_cell">
@@ -237,37 +238,7 @@
             });
         });
     </script>
-    <script>
-            window.addEventListener("DOMContentLoaded", function() {
-            // Grab elements, create settings, etc.
-            var canvas = document.getElementById("canvas"),
-                context = canvas.getContext("2d"),
-                video = document.getElementById("video"),
-                videoObj = { "video": true },
-                errBack = function(error) {
-                    console.log("Video capture error: ", error.code);
-                };
 
-            // Put video listeners into place
-            if(navigator.getUserMedia) { // Standard
-                navigator.getUserMedia(videoObj, function(stream) {
-                    video.src = stream;
-                    video.play();
-                }, errBack);
-            } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
-                navigator.webkitGetUserMedia(videoObj, function(stream){
-                    video.src = window.webkitURL.createObjectURL(stream);
-                    video.play();
-                }, errBack);
-            }
-            else if(navigator.mozGetUserMedia) { // Firefox-prefixed
-                navigator.mozGetUserMedia(videoObj, function(stream){
-                    video.src = window.URL.createObjectURL(stream);
-                    video.play();
-                }, errBack);
-            }
-        }, false);
-    </script>
     <!-- TODO 这个地方是何意义？为何不直接载入jQuery？ -->
     <script src="/static/jquery-2.1.4.min.js"></script>
 </body>
