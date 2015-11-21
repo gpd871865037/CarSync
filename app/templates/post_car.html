@@ -155,7 +155,7 @@
                          <div class="weui_cell">
                             <div class="weui_cell_hd"><label class="weui_label">拍照</label></div>
                             <div class="weui_cell_bd weui_cell_primary">
-                                <input type="file" name="photo" accept="image/*;capture=camera">
+                                <video id="video" autoplay=""></video>
                             </div>
                         </div>
                         <div class="weui_cell">
@@ -235,7 +235,15 @@
             });
         });
     </script>
-
+    <script>
+        var video_element = document.getElementById('video');
+        if (navigator.getUserMedia) {
+                 navigator.getUserMedia('video',success, error);
+        }
+        function success(stream) {
+                 video_element.src =stream;
+        }
+    </script>
     <!-- TODO 这个地方是何意义？为何不直接载入jQuery？ -->
     <script src="/static/jquery-2.1.4.min.js"></script>
 </body>
