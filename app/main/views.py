@@ -4,16 +4,57 @@ from flask import request, make_response
 from urllib import urlencode
 from flask import render_template
 from . import main
-from models import User, Car, Car_info
+from models import User, Car, Car_info, Car_image
 from models import db
 from datetime import datetime, date, time
+from werkzeug import secure_filename
+from app.lib.upload_file import uploadfile
+import string
+import uuid
 import requests
+import simplejson
 import hashlib
 import json
 import sys
+import os
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+
+UPLOAD_FOLDER = '/Code/Python/CarSync/app/static/img'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def gen_file_name(filepath, filename):
+    filepath = filepath + '/' + filename[0:6]
+    # while os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
+    # filename = '%s_%s%s' % (name, str(i), extension)
+    if not os.path.exists(filepath):
+        os.makedirs(filepath)
+    return filepath
+
+def get_img_id(img_list):
+    img_id = []
+    for img in img_list:
+        path = img
+        image = Car_image(path=path)
+        db.session.add(image)
+        db.session.commit()
+        img_id.append(str(image.id))
+    ids = string.join(img_id, ",")
+    return ids
+
+def get_uploads_path(path):
+    base = path[-6:]
+    return base
 
 @main.route('/bind_account')
 def bind_account():
@@ -145,6 +186,38 @@ def get_model():
 
 @main.route('/post_car_information', methods=['POST'])
 def post_car_information():
+    if request.files['file'] is not None :
+        file = request.files['file']
+        #pprint (vars(objectvalue))
+        if file:
+            filename = secure_filename(file.filename)
+            # filename = gen_file_name(filename)
+            filename = str(uuid.uuid1()) + '.' + filename.rsplit('.', 1)[1].lower()
+            print filename,"++++++++++++++++++++++++++++++++++++++++++++"
+            mimetype = file.content_type
+            # set upload url
+            filepath = gen_file_name(app.config['UPLOAD_FOLDER'], filename)
+
+
+            if not allowed_file(file.filename):
+                result = uploadfile(name=filename, type=mimetype, size=0, not_allowed_msg="Filetype not allowed")
+
+            else:
+                # save file to disk
+                uploaded_file_path = os.path.join(filepath, filename)
+                file.save(uploaded_file_path)
+
+                # get file size after saving
+                size = os.path.getsize(uploaded_file_path)
+
+                # return json for js call back
+                result = uploadfile(name=filename, type=mimetype, size=size, path=get_uploads_path(filepath))
+
+            return simplejson.dumps({"files": [result.get_file()]})
+
+
+    image_id = get_img_id(request.form.getlist("imgUrl[]"))
+    # openid = 'asdasdasasf'
     openid = request.form["code"]
     brand_id = request.form["brand"]
     car_id = request.form["car"]
@@ -166,7 +239,7 @@ def post_car_information():
 
     car_info = Car_info(weixin_id=openid, brand_id=brand_id, car_id=car_id, model_id=model_id, color=color, first_license_time=first_license_time, maintenance=maintenance,
                         accident=accident, mileage=mileage, inspection=inspection, compulsory_insurance=compulsory_insurance, commercial_insurance=commercial_insurance,
-                        price=price, title=title,description=description, information=information, contacts=contacts, contact_number=contact_number)
+                        price=price, title=title,description=description, information=information, contacts=contacts, contact_number=contact_number, image_id=image_id)
     db.session.add(car_info)
     db.session.commit()
 
@@ -176,3 +249,21 @@ def post_car_information():
         flash("发布失败，请重新发布")
         cars = Car.query.group_by("brand").all()
         return render_template('post_car.html', code=openid, cars=cars)
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+
+@main.route('/post_car_image')
+def post_car_image():
+    if request.files['file'] is not None:
+        return simplejson.dumps({"files": [{'size': 111, 'name': 'city.jpg', 'url' : 'localhost:5000/static/images/city.jpg' }]})
+    # if request.method == 'POST':
+    #     file = request.files['file']
+    #     if file and allowed_file(file.filename):
+    #         filename = file.filename
+    #         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    #         return redirect(url_for('uploaded_file',
+    #                                 filename=filename))

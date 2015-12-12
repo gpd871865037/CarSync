@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>绑定帐号 - CarSync - 个人车源发布专家</title>
-    <link rel="stylesheet" href="/static/weui.min.css"/>
-    <link rel="stylesheet" href="/static/application.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'weui.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'application.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/jquery.fileupload.css') }}" />
 </head>
 <body class="contouchstart">
     <div class="container js_container">
@@ -23,7 +24,7 @@
             <div class="bd">
                 <div class="weui_cells_title">车辆类型</div>
                 <div class="weui_cells weui_cells_form">
-                    <form action="post_car_information" method="post">
+                    <form action="post_car_information" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="code" value="{{ code }}"/>
                         <div class="weui_cell weui_cell_select weui_select_after">
                             <div class="weui_cell_hd">
@@ -85,7 +86,7 @@
                         <div class="weui_cell">
                             <div class="weui_cell_hd"><label for="" class="weui_label">时间</label></div>
                             <div class="weui_cell_bd weui_cell_primary">
-                                <input class="weui_input" type="date" name="first_license_time" value="">
+                                <input class="weui_input" type="date" name="first_license_time" value="" />
                             </div>
                         </div>
                         <div class="weui_cells_title">是否定期4S店保养</div>
@@ -141,25 +142,23 @@
                         <div class="weui_cell">
                             <div class="weui_cell_hd"><label for="" class="weui_label">时间</label></div>
                             <div class="weui_cell_bd weui_cell_primary">
-                                <input class="weui_input" type="date" name="compulsory_insurance" value="">
+                                <input class="weui_input" type="date" name="compulsory_insurance" value="" />
                             </div>
                         </div>
                         <div class="weui_cells_title">商业险到期</div>
                         <div class="weui_cell">
                             <div class="weui_cell_hd"><label for="" class="weui_label">时间</label></div>
                             <div class="weui_cell_bd weui_cell_primary">
-                                <input class="weui_input" type="date" name="commercial_insurance" value="">
+                                <input class="weui_input" type="date" name="commercial_insurance" value="" />
                             </div>
                         </div>
                         <div class="weui_cells_title">上传图片</div>
                          <div class="weui_cell">
                             <div class="weui_cell_hd"><label class="weui_label">拍照</label></div>
                             <div class="weui_cell_bd weui_cell_primary">
-                                <input type="file" accept="image/*;capture=camera">
-{#                                <video id="video" autoplay></video>#}
-{#                                <button id="snap">Snap Photo</button>#}
-{#                                <canvas id="canvas"></canvas>#}
+                                <input id="fileupload" type="file" name="file" multiple>
                             </div>
+                            <div id="uploadedfiles"></div>
                         </div>
                         <div class="weui_cell">
                             <div class="weui_cell_hd"><label class="weui_label">行驶里程</label></div>
@@ -214,8 +213,7 @@
             </div>
         </div>
     </div>
-    <script src="https://res.wx.qq.com/open/libs/zepto/1.1.6/zepto.js"></script>
-    <script src="/static/application.js"></script>
+    <script src="{{ url_for('static', filename = 'jquery.min.js') }}"></script>
     <script>
         $(function(){
             $("#brands").blur(function(){
@@ -239,7 +237,48 @@
         });
     </script>
 
-    <!-- TODO 这个地方是何意义？为何不直接载入jQuery？ -->
-    <script src="/static/jquery-2.1.4.min.js"></script>
+    <script src="//res.wx.qq.com/open/libs/zepto/1.1.6/zepto.js"></script>
+    <script src="{{ url_for('static', filename = 'application.js') }}"></script>
+    <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+    <script src="{{ url_for('static', filename = 'js/vendor/jquery.ui.widget.js') }}"></script>
+    <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+    <script src="{{ url_for('static', filename = 'js/load-image.all.min.js') }}"></script>
+    <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+    <script src="{{ url_for('static', filename = 'js/canvas-to-blob.min.js') }}"></script>
+    <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+    <script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+    <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+    <script src="{{ url_for('static', filename = 'js/jquery.iframe-transport.js') }}"></script>
+    <!-- The basic File Upload plugin -->
+    <script src="{{ url_for('static', filename = 'js/jquery.fileupload.js') }}"></script>
+    <!-- The File Upload processing plugin -->
+    <script src="{{ url_for('static', filename = 'js/jquery.fileupload-process.js') }}"></script>
+    <!-- The File Upload image preview & resize plugin -->
+    <script src="{{ url_for('static', filename = 'js/jquery.fileupload-image.js') }} "></script>
+    <!-- The File Upload audio preview plugin -->
+    <script src="{{ url_for('static', filename = 'js/jquery.fileupload-audio.js') }}"></script>
+    <!-- The File Upload video preview plugin -->
+    <script src="{{ url_for('static', filename = 'js/jquery.fileupload-video.js') }}"></script>
+    <!-- The File Upload validation plugin -->
+    <script src="{{ url_for('static', filename = 'js/jquery.fileupload-validate.js') }}"></script>
+    <script>
+        $(function(){
+          $('#fileupload').fileupload({
+{#            url: 'post_car_image',#}
+            dataType: 'json',
+            add: function (e, data) {
+                data.context = $('<p/>').text('Uploading...').appendTo(document.body);
+                data.submit();
+            },
+            done: function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    console.log(file);
+                    $('#uploadedfiles').append("<input type='hidden' name='imgUrl[]' value='" + file.url + "' />" + "<img src='" + file.url + "' style='width:50px;height:50px' />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                });
+            }
+          });
+        });
+    </script>
+
 </body>
 </html>

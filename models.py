@@ -72,6 +72,15 @@ class Car_info(db.Model):
     information = db.Column(db.String)
     contacts = db.Column(db.String)
     contact_number = db.Column(db.String)
+    image_id = db.Column(db.String)
+
+    def repr(self):
+        return '<User %r>' % self.username
+
+class Car_image(db.Model):
+    __tablename__ = 'car_image'
+    id = db.Column(db.Integer, primary_key=True)
+    path = db.Column(db.String)
 
     def repr(self):
         return '<User %r>' % self.username
