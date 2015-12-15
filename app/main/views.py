@@ -21,11 +21,25 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-UPLOAD_FOLDER = '/Code/Python/CarSync/app/static/img'
+# UPLOAD_FOLDER = '/Code/Python/CarSync/app/static/img'
+UPLOAD_FOLDER = '/Code/CarSync/app/static/img'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+APPID = "wx54073d86056904da"
+SECRET = "wx54073d86056904da"
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['APPID'] = APPID
+app.config['SECRET'] = SECRET
+
+
+def get_openid(code):
+    appid = app.config['APPID']
+    secret = app.config['SECRET']
+    data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
+    result = json.loads(data.text)
+    openid = result.get('openid')
+    return openid
 
 
 def allowed_file(filename):
@@ -59,11 +73,7 @@ def get_uploads_path(path):
 @main.route('/bind_account')
 def bind_account():
     code = request.args.get('code')
-    appid = "wx54073d86056904da"
-    secret = "e102c09b6828c759084407bebc785b08&code"
-    data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
-    result = json.loads(data.text)
-    openid = result.get('openid')
+    openid = get_openid(code)
     return render_template('bind_account.html', code=openid)
 
 
@@ -124,32 +134,28 @@ def check_signature():
 
 
 # FIXME 暂时先注释掉验证服务器的方法，转而接受微信的POST请求
-@main.route('/get_access_token')
-def get_access_token():
-    app_id = "wx54073d86056904da"
-    app_secret = "e102c09b6828c759084407bebc785b08"
-    r = requests.get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + app_id + "&secret=" + app_secret)
-    if r.status_code == 200:
-        return make_response(r.text)
-    else:
-        return None
+# @main.route('/get_access_token')
+# def get_access_token():
+#     app_id = "wx54073d86056904da"
+#     app_secret = "e102c09b6828c759084407bebc785b08"
+#     r = requests.get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + app_id + "&secret=" + app_secret)
+#     if r.status_code == 200:
+#         return make_response(r.text)
+#     else:
+#         return None
 
 
 @main.route('/post_car')
 def post_car():
-    # code = request.args.get('code')
-    # appid = "wx54073d86056904da"
-    # secret = "e102c09b6828c759084407bebc785b08&code"
-    # data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
-    # result = json.loads(data.text)
-    # openid = result.get('openid')
-    #
-    # user = User.query.filter_by(weixin_id=openid).first()
-    # if user is None:
-    #     flash("账号未绑定")
-    #     return render_template('post_car.html')
+    code = request.args.get('code')
+    openid = get_openid(code)
+
+    exitis = False
+    user = User.query.filter_by(weixin_id=openid).first()
+    if user is None:
+        exitis = True
     cars = Car.query.group_by("brand").all()
-    return render_template('post_car.html', cars=cars)
+    return render_template('post_car.html', cars=cars, exitis=exitis)
 
 
 @main.route('/insert_car')
@@ -217,8 +223,8 @@ def post_car_information():
 
 
     image_id = get_img_id(request.form.getlist("imgUrl[]"))
-    # openid = 'asdasdasasf'
-    openid = request.form["code"]
+    openid = '1234456'
+    # openid = request.form["code"]
     brand_id = request.form["brand"]
     car_id = request.form["car"]
     model_id = request.form["model"]
@@ -267,3 +273,27 @@ def post_car_image():
     #         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     #         return redirect(url_for('uploaded_file',
     #                                 filename=filename))
+
+
+@main.route('/car_list')
+def car_list():
+    code = request.args.get('code')
+    openid = get_openid(code)
+    data = User.query.filter_by(weixin_id=openid).all()
+    if data is None:
+        return redirect("/bind_account?openid=" + openid)
+    car_info = Car_info.query.filter_by(weixin_id=openid).all()
+    for info in car_info:
+        id = info.image_id.split(",")[0]
+        car_first_image = Car_image.query.filter_by(id=id).first()
+        url = car_first_image.path
+        car = Car.query.filter_by(brand_id=info.brand_id).first()
+        info.brand = car.brand
+        car = Car.query.filter_by(car_id=info.car_id).first()
+        info.car = car.car
+        car = Car.query.filter_by(model_id=info.model_id).first()
+        info.model = car.model
+        info.url = url
+    return render_template('car_info_list.html', car_info=car_info)
+
+

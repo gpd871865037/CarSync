@@ -204,6 +204,14 @@
                                 <input class="weui_input" type="text" name="contact_number" placeholder="请填写联系电话">
                             </div>
                         </div>
+                        {% if exitis %}
+                            <div class="weui_cell">
+                                <div class="weui_cell_hd"><label class="weui_label">账号绑定</label></div>
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <input class="weui_input" type="text" name="phone" placeholder="请填写联系电话">
+                                </div>
+                            </div>
+                        {% endif %}
                         <!-- TODO 注意处理html之间的缩进 -->
                         <div class="weui_btn_area">
                             <input type="submit" class="weui_btn weui_btn_primary" value="确定" />

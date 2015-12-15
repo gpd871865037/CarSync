@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>绑定帐号 - CarSync - 个人车源发布专家</title>
+    <link rel="stylesheet" href="/static/weui.min.css"/>
+    <link rel="stylesheet" href="/static/application.css"/>
+</head>
+<body class="contouchstart">
+    <div class="container js_container">
+        <div class="page">
+            <div class="hd">
+                <h1 class="page_title">发布列表</h1>
+                <p class="page_desc">CarSync - 个人车源发布专家</p>
+            </div>
+              {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                      {{ message }}
+                </div>
+              {% endfor %}
+            <div class="bd">
+                <div class="weui_cells_title">我的车辆发布信息</div>
+                <div class="weui_cells weui_cells_access">
+                    {% for info in car_info %}
+                        <a class="weui_cell" href="javascript:;">
+                            <div class="weui_cell_hd"><img src="{{ info.url }}" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <p>{{ info.brand }} {{ info.car }} {{ info.model }}</p>
+                            </div>
+                            <div class="weui_cell_ft">查看详细信息</div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{#    <script type=text/javascript>#}
+{#      $(function() {#}
+{#        $('#phone').bind('click', function() {#}
+{#          $.post($SCRIPT_ROOT + '/get_info', {#}
+{#            a: $('input[name="phone"]').val()#}
+{#          }, function(data) {#}
+{#            console.log('1')
+{#          });#}
+{#          return false;#}
+{#        });#}
+{#      });#}
+{#    </script>#}
+    <!-- zepto.js was cached by wechat app -->
+    <script src="https://res.wx.qq.com/open/libs/zepto/1.1.6/zepto.js"></script>
+    <script src="/static/application.js"></script>
+
+    <script src="/static/jquery-2.1.4.min.js"></script>
+</body>
+</html>
