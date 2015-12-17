@@ -6,7 +6,7 @@ class uploadfile():
         self.type = type
         self.size = size
         self.not_allowed_msg = not_allowed_msg
-        self.url = "/static/img/%s/%s" % (path, name)
+        self.url = "/Code/CarSync/app/static/img/%s/%s" % (path, name)
         self.thumbnail_url = "thumbnail/%s" % name
         self.delete_url = "delete/%s" % name
         self.delete_type = "DELETE"
