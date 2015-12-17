@@ -37,7 +37,6 @@ def get_openid(code):
     appid = app.config['APPID']
     secret = app.config['SECRET']
     data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
-    print data,"++++++++++++++++++++++++++++++++++++++++++++++++"
     result = json.loads(data.text)
     openid = result.get('openid')
     return openid
@@ -74,7 +73,6 @@ def get_uploads_path(path):
 @main.route('/bind_account')
 def bind_account():
     code = request.args.get('code')
-    print code,"--------------+++++++++++++++"
     openid = get_openid(code)
     print openid,"-----------------------------------------"
     return render_template('bind_account.html', code=openid)
@@ -95,9 +93,9 @@ def get_info():
         db.session.add(user)
         db.session.commit()
 
-        if user is not None:
+        if user.id is not None:
             # return redirect()
-            return '账号已绑定'
+            return '账号成功绑定'
         else:
             flash("绑定失败，请在公众号重新绑定")
             return render_template('bind_account.html', code=openid)
@@ -150,13 +148,12 @@ def check_signature():
 
 @main.route('/post_car')
 def post_car():
-    # code = request.args.get('code')
-    # openid = get_openid(code)
-    openid = '1234324234'
+    code = request.args.get('code')
+    openid = get_openid(code)
+    # openid = '1234324234'
 
     exitis = False
     user = User.query.filter_by(weixin_id=openid).first()
-    print user,"======================"
     if user is None:
         exitis = True
     cars = Car.query.group_by("brand").all()

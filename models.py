@@ -16,14 +16,17 @@ db = SQLAlchemy(app)
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    weixin_id = db.Column(db.Integer, unique=True, index=True)
+    weixin_id = db.Column(db.String, unique=True, index=True)
     phone = db.Column(db.Integer)
+    name = db.Column(db.String)
+    head_image = db.Column(db.String)
     created_times = db.Column(db.DATETIME)
     updated_times = db.Column(db.DATETIME)
     deleted_times = db.Column(db.DATETIME)
 
     def repr(self):
         return '<User %r>' % self.username
+
 
 class Car(db.Model):
     __tablename__ = 'cars'
@@ -54,7 +57,7 @@ class Car(db.Model):
 class Car_info(db.Model):
     __tablename__ = 'car_info'
     id = db.Column(db.Integer, primary_key=True)
-    weixin_id = db.Column(db.Integer, index=True)
+    weixin_id = db.Column(db.String, index=True)
     brand_id = db.Column(db.Integer)
     car_id = db.Column(db.Integer)
     model_id = db.Column(db.Integer)
@@ -77,10 +80,22 @@ class Car_info(db.Model):
     def repr(self):
         return '<User %r>' % self.username
 
+
 class Car_image(db.Model):
     __tablename__ = 'car_image'
     id = db.Column(db.Integer, primary_key=True)
     path = db.Column(db.String)
+
+    def repr(self):
+        return '<User %r>' % self.username
+
+
+class Published_vehicle_account(db.Model):
+    __tablename__ = 'published_vehicle_account'
+    id = db.Column(db.Integer, primary_key=True)
+    account = db.Column(db.String)
+    password = db.Column(db.String)
+    website = db.Column(db.String)
 
     def repr(self):
         return '<User %r>' % self.username
