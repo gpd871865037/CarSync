@@ -37,6 +37,7 @@ def get_openid(code):
     appid = app.config['APPID']
     secret = app.config['SECRET']
     data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
+    print data,"+++++++++++++++++++++++++++++++++++++++++++++++++"
     result = json.loads(data.text)
     openid = result.get('openid')
     return openid
@@ -73,6 +74,7 @@ def get_uploads_path(path):
 @main.route('/bind_account')
 def bind_account():
     code = request.args.get('code')
+    print code,"--------------+++++++++++++++"
     openid = get_openid(code)
     print openid,"-----------------------------------------"
     return render_template('bind_account.html', code=openid)
