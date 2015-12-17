@@ -74,6 +74,7 @@ def get_uploads_path(path):
 def bind_account():
     code = request.args.get('code')
     openid = get_openid(code)
+    print openid,"-----------------------------------------"
     return render_template('bind_account.html', code=openid)
 
 
@@ -94,7 +95,7 @@ def get_info():
 
         if user is not None:
             # return redirect()
-            return 'success'
+            return '账号已绑定'
         else:
             flash("绑定失败，请在公众号重新绑定")
             return render_template('bind_account.html', code=openid)
@@ -147,11 +148,13 @@ def check_signature():
 
 @main.route('/post_car')
 def post_car():
-    code = request.args.get('code')
-    openid = get_openid(code)
+    # code = request.args.get('code')
+    # openid = get_openid(code)
+    openid = '1234324234'
 
     exitis = False
     user = User.query.filter_by(weixin_id=openid).first()
+    print user,"======================"
     if user is None:
         exitis = True
     cars = Car.query.group_by("brand").all()
@@ -203,6 +206,7 @@ def post_car_information():
             mimetype = file.content_type
             # set upload url
             filepath = gen_file_name(app.config['UPLOAD_FOLDER'], filename)
+            print filepath,"++++++++++++++++++++++++++++++++++++++++++++"
 
 
             if not allowed_file(file.filename):
@@ -223,8 +227,8 @@ def post_car_information():
 
 
     image_id = get_img_id(request.form.getlist("imgUrl[]"))
-    openid = '1234456'
-    # openid = request.form["code"]
+    # openid = '1234456'
+    openid = request.form["code"]
     brand_id = request.form["brand"]
     car_id = request.form["car"]
     model_id = request.form["model"]
