@@ -289,7 +289,10 @@ def car_list():
     for info in car_info:
         id = info.image_id.split(",")[0]
         car_first_image = Car_image.query.filter_by(id=id).first()
-        url = car_first_image.path
+        if car_first_image is None:
+            url = ''
+        else:
+            url = car_first_image.path
         car = Car.query.filter_by(brand_id=info.brand_id).first()
         info.brand = car.brand
         car = Car.query.filter_by(car_id=info.car_id).first()
