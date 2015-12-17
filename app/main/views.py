@@ -37,7 +37,7 @@ def get_openid(code):
     appid = app.config['APPID']
     secret = app.config['SECRET']
     data = requests.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + secret + "&code="+ code +"&grant_type=authorization_code")
-    print data,"+++++++++++++++++++++++++++++++++++++++++++++++++"
+    print data,"++++++++++++++++++++++++++++++++++++++++++++++++"
     result = json.loads(data.text)
     openid = result.get('openid')
     return openid
