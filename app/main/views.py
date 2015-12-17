@@ -157,7 +157,7 @@ def post_car():
     if user is None:
         exitis = True
     cars = Car.query.group_by("brand").all()
-    return render_template('post_car.html', cars=cars, exitis=exitis)
+    return render_template('post_car.html', cars=cars, exitis=exitis, code=openid)
 
 
 @main.route('/insert_car')
