@@ -22,7 +22,7 @@ sys.setdefaultencoding('utf-8')
 
 
 # UPLOAD_FOLDER = '/Code/Python/CarSync/app/static/img'
-UPLOAD_FOLDER = '/Code/CarSync/app/static/img'
+UPLOAD_FOLDER = '/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 APPID = "wx54073d86056904da"
 SECRET = "e102c09b6828c759084407bebc785b08"
