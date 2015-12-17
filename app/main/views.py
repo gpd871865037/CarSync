@@ -25,7 +25,7 @@ sys.setdefaultencoding('utf-8')
 UPLOAD_FOLDER = '/Code/CarSync/app/static/img'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 APPID = "wx54073d86056904da"
-SECRET = "wx54073d86056904da"
+SECRET = "e102c09b6828c759084407bebc785b08"
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
